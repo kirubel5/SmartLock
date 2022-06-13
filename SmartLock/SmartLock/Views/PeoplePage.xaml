@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:SmartLock.ViewModels" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             x:Class="SmartLock.Views.PeoplePage"
+             BackgroundColor="{StaticResource Gray-100}"
+             Title="People">
+
+    <ContentPage.BindingContext>
+        <viewmodels:PeopleViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        
+        <StackLayout>
+                <RefreshView    
+                    Grid.Row="1"
+                    RefreshColor="Black"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    Command="{Binding RefreshCommand}">
+
+                    <CollectionView 
+                        x:Name="PeopleCollection"                            
+                        ItemsSource ="{Binding People}"
+                        ItemSizingStrategy="MeasureFirstItem"
+                        SelectionMode="Single"
+                        BackgroundColor="{StaticResource Gray-50}"
+                        SelectionChangedCommand="{Binding SelectCommand}"
+                        SelectedItem="{Binding SelectedPerson}">
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                Orientation="Vertical"
+                                ItemSpacing="5"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.EmptyView>
+                            <ContentView>
+                                <StackLayout
+                                    BackgroundColor="Transparent"
+                                    Spacing="0"
+                                    VerticalOptions="Center">
+
+                                    <!--  Display the svg illustration image  -->
+                                    <Image
+                                        Margin="10,10,10,10"
+                                        HeightRequest="300"
+                                        WidthRequest="200"
+                                        Source="NoItem"
+                                        VerticalOptions="Center"/>
+
+                                    <!--  Label to display content  -->
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Margin="8,10,8,0"
+                                        FontSize="20"
+                                        Text="No registered people"
+                                        VerticalTextAlignment="Center"
+                                        FontFamily="Montserrat-Regular" />
+                                </StackLayout>
+                               
+                            </ContentView>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="5"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource Gray-50}"
+                                    BorderColor="{StaticResource Gray-200}"
+                                    CornerRadius="5"
+                                    HasShadow="False"                                    
+                                    HeightRequest="60">
+
+                                    <Grid
+                                        ColumnDefinitions="Auto, *, Auto"
+                                        ColumnSpacing="0"
+                                        RowDefinitions="Auto, Auto"
+                                        RowSpacing="0" >
+
+                                        <!--  Profile image  -->
+                                        <border:SfBorder
+                                            Grid.RowSpan="2"
+                                            Margin="10"
+                                            BorderColor="{StaticResource Gray-Bg}"
+                                            BorderWidth="1"
+                                            CornerRadius="24"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                                            <Image
+                                                Aspect="AspectFit"
+                                                BackgroundColor="{StaticResource Gray-200}"
+                                                HeightRequest="50"
+                                                WidthRequest="50"
+                                                Source="person">
+                                            </Image>
+                                        </border:SfBorder>
+
+                                        <Label
+                                            Margin="10,10,0,5"
+                                            Grid.Column="1"
+                                            Grid.Row="0"
+                                            VerticalOptions="Center"
+                                            FontFamily="Montserrat-Regular"
+                                            FontSize="17"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="Name : "
+                                            TextColor="{StaticResource Gray-900}" />
+
+                                        <Label
+                                            Margin="-30,10,0,5"
+                                            Grid.Column="1"
+                                            Grid.Row="0"
+                                            VerticalOptions="Center"
+                                            FontFamily="Montserrat-Regular"
+                                            FontSize="17"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding Name}"
+                                            TextColor="{StaticResource Gray-900}" />
+
+                                        <Label
+                                            Margin="43,0,0,10"
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            VerticalOptions="Center"
+                                            FontFamily="Montserrat-Regular"
+                                            FontSize="14"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="Id : "
+                                            TextColor="{StaticResource Gray-700}" />
+
+                                        <Label
+                                            Margin="-30,0,0,10"
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            VerticalOptions="Center"
+                                            FontFamily="Montserrat-Regular"
+                                            FontSize="14"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding Id}"
+                                            TextColor="{StaticResource Gray-700}" />
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+        </StackLayout> 
+    </ContentPage.Content>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  
+            Text="Add "
+            Order="Primary"
+            Priority="0"
+            Command="{Binding AddPersonCommand}"/>
+
+        <ToolbarItem  
+            Text="Clear all "
+            Order="Primary"
+            Priority="1"
+            Command="{Binding ClearCommand}"/>
+    </ContentPage.ToolbarItems>   
+</ContentPage>

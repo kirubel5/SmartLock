@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartLock.Views.LoginPage"
+             xmlns:viewmodels="clr-namespace:SmartLock.ViewModels" 
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="DodgerBlue">
+
+    <ContentPage.BindingContext>
+        <viewmodels:LoginViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <!--Entry: Name -->
+            <inputLayout:SfTextInputLayout
+                Margin="5,75,5,5"
+                Style="{StaticResource BasicTextEntry}"
+                Hint="Pin">
+                <Entry 
+                    x:Name="EntryName"
+                    Text="{Binding Pin, Mode=TwoWay}"
+                    TextColor="{StaticResource Gray-900}"
+                    Keyboard="Numeric"/>
+            </inputLayout:SfTextInputLayout>
+
+            <button:SfButton 
+                Command="{Binding LoginCommand}"
+                BorderThickness="1"
+                BorderColor="Black"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="0,10,0,0"
+                HeightRequest="100"
+                WidthRequest="100"
+                CornerRadius="80"
+                BackgroundImage="power.png"
+                BackgroundColor="DodgerBlue"/>
+           
+            <!--<button:SfButton 
+                Command="{Binding Command3}"
+                BorderThickness="1"
+                BorderColor="Black"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="0,40,0,0"
+                HeightRequest="100"
+                WidthRequest="100"
+                CornerRadius="80"
+                BackgroundImage="power.png"
+                BackgroundColor="White"/>-->
+
+            <Label 
+                Margin="10"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Text="{Binding Message}"
+                IsVisible="{Binding MessageIsVisible}"
+                FontSize="17"
+                FontFamily="Montserrat-Regular"/>
+
+        </StackLayout>       
+    </ContentPage.Content>
+</ContentPage>

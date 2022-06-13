@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+              xmlns:viewmodels="clr-namespace:SmartLock.ViewModels" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             x:Class="SmartLock.Views.FeedPage"
+             BackgroundColor="{StaticResource Gray-100}"
+             Title="Feed"
+             x:Name="FeedView">
+
+    <ContentPage.BindingContext>
+        <viewmodels:FeedViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView
+                Grid.Row="1"
+                RefreshColor="Black"
+                IsRefreshing="{Binding IsRefreshing}"
+                Command="{Binding RefreshCommand}">
+                <CollectionView 
+                    x:Name="FeedCollection"                            
+                    ItemsSource ="{Binding Feeds}"
+                    ItemSizingStrategy="MeasureFirstItem"
+                    SelectionMode="Single"
+                    BackgroundColor="{StaticResource Gray-100}"
+                    SelectionChangedCommand="{Binding SelectCommand}"
+                    SelectedItem="{Binding SelectedFeed}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+                            Orientation="Vertical"
+                            ItemSpacing="5"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <ScrollView>
+                                <StackLayout
+                                    BackgroundColor="Transparent"
+                                    Spacing="0"
+                                    VerticalOptions="Center">
+
+                                    <!--  Display the svg illustration image  -->
+                                    <Image
+                                        Margin="10,10,10,10"
+                                        HeightRequest="300"
+                                        WidthRequest="200"
+                                        Source="NoItem"
+                                        VerticalOptions="Center"/>
+
+                                    <!--  Label to display content  -->
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Margin="8,10,8,0"
+                                        FontSize="18"
+                                        Text="No unauthorized login attempts"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center"
+                                        FontFamily="Montserrat-Regular"/>
+                                </StackLayout>
+                            </ScrollView>
+                        </ContentView>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                Margin="5"
+                                Padding="0"
+                                BackgroundColor="{StaticResource Gray-Bg}"
+                                BorderColor="{StaticResource Gray-200}"
+                                CornerRadius="5"    
+                                HasShadow="False"
+                                HeightRequest="280" >
+
+                                <Grid
+                                    ColumnDefinitions="Auto"
+                                    ColumnSpacing="0"
+                                    RowDefinitions="Auto, 30"
+                                    RowSpacing="0" >
+
+                                    <!--  Profile image  -->
+                                    <border:SfBorder
+                                        Grid.ColumnSpan="2"
+                                        Margin="5"
+                                        BorderColor="{StaticResource Gray-Bg}"
+                                        BorderWidth="1"
+                                        CornerRadius="10"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                        <Image
+                                            Aspect="AspectFill"
+                                            BackgroundColor="{StaticResource Gray-200}"
+                                            HeightRequest="200"
+                                            WidthRequest="300"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Source="{Binding FeedImage}">
+                                        </Image>
+                                    </border:SfBorder>                                   
+
+                                    <Label
+                                        Margin="20,10,0,0"
+                                        Grid.Row="1"
+                                        VerticalOptions="Start"
+                                        FontFamily="Montserrat-Regular"
+                                        FontSize="15"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding FeedDate}"
+                                        TextColor="{StaticResource Gray-900}"/>
+
+                                    <Label
+                                        Margin="20,-10,0,0"
+                                        Grid.Row="2"
+                                        VerticalOptions="Center"
+                                        FontFamily="Montserrat-Regular"
+                                        FontSize="14"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding FeedTime}"
+                                        TextColor="{StaticResource Gray-900}" />
+
+
+                                    <Frame
+                                        Margin="0,0,20,0"
+                                        Grid.Column="1"
+                                        Grid.Row="1"
+                                        BackgroundColor="MediumSeaGreen"
+                                        BorderColor="White"
+                                        CornerRadius="3"
+                                        HasShadow="False"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="End"
+                                        HeightRequest="35"
+                                        WidthRequest="70"
+                                        Padding="0">
+                                        
+                                        <Label Text="{Binding FeedType}"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="White"/>
+                                    </Frame>
+
+                                    <buttons:SfButton    
+                                        Margin="0,0,20,0"  
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="End"                                  
+                                        Grid.Column="1"
+                                        Grid.Row="2"
+                                        Style="{StaticResource IconButtonStyle}"
+                                        FontFamily="FAFS"
+                                        FontSize="16"
+                                        Text="{StaticResource DownArrow}"
+                                        HeightRequest="35"
+                                        WidthRequest="70"
+                                        CornerRadius="3"
+                                        Command="{Binding BindingContext.DownloadImageCommand, Source={x:Reference FeedCollection}}"
+                                        CommandParameter="{Binding .}"/>
+
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+
+    <ContentPage.ToolbarItems>      
+
+        <ToolbarItem  
+            Text="Clear all "
+            Order="Primary"
+            Priority="0"
+            Command="{Binding ClearCommand}"/>
+    </ContentPage.ToolbarItems>
+</ContentPage>

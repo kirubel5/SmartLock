@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SmartLock.ViewModels" 
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" 
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="SmartLock.Views.AddPersonPage"
+             Title="Registration">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddPersonViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                    Spacing="5"
+                    VerticalOptions="FillAndExpand"
+                    Padding="30,0,30,50">
+
+                <!--Label: login -->
+                <Label                    
+                    Margin="0,8"
+                    Style="{StaticResource DescriptionLabelStyle}"
+                    Text="Register"
+                    FontSize="Title"
+                    TextColor="{StaticResource Gray-900}"/>               
+
+                <!--Entry: Name -->
+                <inputLayout:SfTextInputLayout
+                    Margin="5"
+                    Style="{StaticResource BasicTextEntry}"
+                    Hint="Name">
+                    <Entry 
+                        x:Name="EntryName"
+                        Text="{Binding Name, Mode=TwoWay}"
+                        TextColor="{StaticResource Gray-900}"/>
+                </inputLayout:SfTextInputLayout>
+
+              
+
+                <!--Lable: Message -->
+                <Label
+                    Margin="0,8"
+                    Style="{StaticResource DescriptionLabelStyle}"
+                    Text="{Binding Message}"
+                    IsVisible="{Binding MessageIsVisible}"
+                    FontSize="13"
+                    FontFamily="Montserrat-Regular"
+                    TextColor="OrangeRed"/>
+
+                <Button                                              
+                    Margin="20,20,20,10"
+                    Text="Save"
+                    Style="{StaticResource BasicButton}"
+                    BackgroundColor="#00DFF8"
+                    Command="{Binding SaveCommand}"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  
+            Text="Add     "
+            Order="Primary"
+            Priority="0"
+            Command="{Binding Reload}"/>
+    </ContentPage.ToolbarItems>
+</ContentPage>

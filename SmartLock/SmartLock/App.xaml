@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="SmartLock.App">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <!--#region Colors -->
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="ActiveColor">LightGreen</Color>
+            <Color x:Key="InactiveColor">Red</Color>
+            <Color x:Key="LightRedColor">#FF3D3D</Color>
+            <Color x:Key="FacebookBlue">#4267B2</Color>
+            <Color x:Key="TwitterBlue">#55acee</Color>
+            <Color x:Key="FacebookLogin">#3b5998</Color>
+            <Color x:Key="RateColor">#FFD400</Color>
+            <!--#endregion-->
+
+            <!--#region LightTheme -->
+            <Color x:Key="PrimaryColor">#f54e5e</Color>
+            <Color x:Key="ButtonGreen">#00FF7F</Color>
+            <Color x:Key="Glyph">#353535</Color>
+            <Color x:Key="Gray-50">#FCFCFC</Color>
+            <Color x:Key="Gray-100">#f6f7f8</Color>
+            <Color x:Key="Gray-200">#ebecef</Color>
+            <Color x:Key="Gray-250">#dadde2</Color>
+            <Color x:Key="Gray-300">#ced2d9</Color>
+            <Color x:Key="Gray-400">#b2b8c2</Color>
+            <Color x:Key="Gray-600">#788396</Color>
+            <Color x:Key="Gray-700">#606a7b</Color>
+            <Color x:Key="Gray-800">#4a515e</Color>
+            <Color x:Key="Gray-900">#333942</Color>
+            <Color x:Key="Gray-White">#ffffff</Color>
+            <Color x:Key="Gray-Bg">#ffffff</Color>
+            <Color x:Key="Gray-Black">#000000</Color>
+            <Color x:Key="GrayShadowColor">#ffffff</Color>
+
+            <x:String x:Key="Reload">&#xf01e;</x:String>
+            <x:String x:Key="DownArrow">&#xf063;</x:String>
+
+            <!--  Common style for Description labels  -->
+            <Style x:Key="DescriptionLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Default" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="Montserrat-Medium"/>
+            </Style>
+
+            <!--Entry Style-->
+            <Style x:Key="BasicTextEntry" TargetType="inputLayout:SfTextInputLayout">
+                <Setter Property="ContainerType" Value="Outlined"/>
+                <Setter Property="FocusedColor" Value="#00DFF8"/>
+                <Setter Property="UnfocusedColor" Value="#333942"/>
+                <Setter Property="ErrorColor" Value="Red"/>
+                <Setter Property="HintLabelStyle">
+                    <Setter.Value>
+                        <inputLayout:LabelStyle FontSize="Medium" FontFamily="Cambria"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="BasicButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontFamily" Value="Montserrat-SemiBold" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="WidthRequest" Value="370"/>
+                <Setter Property="HeightRequest" Value="53"/>
+                <Setter Property="CornerRadius" Value="35"/>
+            </Style>
+
+            <!--  Common style for Icon buttons  -->
+            <Style x:Key="IconButtonStyle" TargetType="button:SfButton">
+                <Setter Property="TextColor" Value="{StaticResource Gray-700}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontFamily" Value="FontIcons" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="CornerRadius" Value="25" />
+            </Style>
+
+            <Style x:Key="HorizontalSeparatorStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="{StaticResource Gray-200}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Gray-200}" />
+            </Style>
+
+            <Style x:Key="IconLableStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Gray-700 }"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="FontIcons"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
