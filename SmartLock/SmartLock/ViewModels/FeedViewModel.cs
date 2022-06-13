@@ -27,7 +27,7 @@ namespace SmartLock.ViewModels
             feeds = new ObservableRangeCollection<FeedModel>();
             Feeds = new ObservableRangeCollection<FeedModel>();
 
-            RefreshCommand = new Command(OnRefresh);
+            RefreshCommand = new AsyncCommand(OnRefresh);
             DownloadImageCommand = new AsyncCommand<object>(OnDownloadImageButtonClicked);
             ClearCommand = new AsyncCommand(OnClearButtonClicked);
         }
@@ -42,7 +42,7 @@ namespace SmartLock.ViewModels
 
         #region Commands
         public ICommand RefreshCommand { get; }
-        public ICommand DownloadImageCommand { get; } 
+        public ICommand DownloadImageCommand { get; }
         public ICommand ClearCommand { get; }
         #endregion
 
@@ -89,10 +89,10 @@ namespace SmartLock.ViewModels
                 return "Fing.";
         }
 
-        private void OnRefresh()
+        private async Task OnRefresh()
         {
             IsRefreshing = true;
-            this.Load();
+            await Task.Delay(200);
             IsRefreshing = false;
         }
 

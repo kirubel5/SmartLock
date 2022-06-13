@@ -53,7 +53,7 @@ namespace SmartLock.ViewModels
 
         #region Methods
         public async Task Load()
-        {
+        {    
             SelectedPerson = null;
             People.Clear();
 
@@ -61,13 +61,30 @@ namespace SmartLock.ViewModels
                 return;
             else
                 People.AddRange(PeopleCache.People);
-            
         }
 
         public async Task OnRefresh()
         {
             IsRefreshing = true;
-            await this.Load();
+
+            try
+            {
+                await DataAccess.LoadData();
+            }
+            catch (Exception)
+            {
+                DependencyService.Get<IToast>()?.MakeToast("Something went wrong, please try again");
+                return;
+            }
+
+            SelectedPerson = null;
+            People.Clear();
+
+            if (PeopleCache.People == null || PeopleCache.People.Count == 0)
+                return;
+            else
+                People.AddRange(PeopleCache.People);
+
             IsRefreshing = false;
         }
 

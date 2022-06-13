@@ -13,6 +13,7 @@ namespace SmartLock.Services
         //This method caches the list received from the arduino
         public static void AddListToCache(List<PersonModel> models)
         {
+            People.Clear();//clear the cache before adding new list
             People.AddRange(models);
         }
 

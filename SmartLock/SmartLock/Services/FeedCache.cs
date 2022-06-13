@@ -18,6 +18,7 @@ namespace SmartLock.Services
         //This method caches the list received from the arduino
         public static void AddListToCache(List<FeedModel> models)
         {
+            Feeds.Clear();//clear Feed before adding new list
             Feeds.AddRange(models);
         }
     }
